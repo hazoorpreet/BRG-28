@@ -40,6 +40,8 @@ System resource monitoring script also ran without problems.
 
 ![ResourceMonitoringScript.png](./ResourceMonitoringScript.png)
 
+### Reflections
+
 - What does free -h show?
     - Free memory on mounted storage
 - How can this script be modified to monitor network usage?
