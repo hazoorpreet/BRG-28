@@ -67,12 +67,10 @@ MiB Swap:   3914.0 total,   3913.5 free,      0.5 used.   2692.4 avail Mem
 `top` allowed me to view running processes along with the active resource usage. I quit the program with `q`
 
 ```
-hazoor@ICT171Labs:~$ ls
-books              Downloads               Pictures   testfile3
-books.tar          hello_world.c           Public     Videos
-custom_index.html  hello_world_executable  snap       webserver-key.pem
-Desktop            LabFiles                Templates
-Documents          Music                   testfile
+hazoor@ICT171Labs:~$ ls          
+Desktop     Music       snap
+Documents   Pictures    Templates
+Downloads   Public      Videos
 hazoor@ICT171Labs:~$ ls -la
 total 1264
 drwxr-x--- 19 hazoor hazoor    4096 Sep 28 17:05 .
