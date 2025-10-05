@@ -38,7 +38,7 @@ System Information script was created and run easily as well
 
 System resource monitoring script also ran without problems.
 
-![ResourceMonitoringScript.png](./ResourceMonitoringScript.png)
+![ResourceMonitoringScript.png](./Screenshots/ResourceMonitoringScript.png)
 
 ### Reflections
 
