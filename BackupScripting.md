@@ -400,3 +400,158 @@ hazoor@ICT171Labs:~$
 - How does cron differ from manual execution?
 - What happens if SSH keys are not accepted ahead of time?
 - How can login messages help improve user/system engagement?
+
+## Windows Backup Scripting
+
+I started by setting up my workspace
+```powershell
+PS C:\Users\User\Documents> New-Item -Path "C:\BackupLab\Documents\testfolder" -ItemType Directory -Force
+
+
+    Directory: C:\BackupLab\Documents
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         10/6/2025   4:45 PM                testfolder
+
+
+PS C:\Users\User\Documents> cd C:\BackupLab\Documents
+PS C:\BackupLab\Documents> 1..5 | ForEach-Object { New-Item -Path "C:\BackupLab\Documents" -Name "file$_.txt" -ItemType File }
+
+
+    Directory: C:\BackupLab\Documents
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         10/6/2025   4:48 PM              0 file1.txt
+-a----         10/6/2025   4:48 PM              0 file2.txt
+-a----         10/6/2025   4:48 PM              0 file3.txt
+-a----         10/6/2025   4:48 PM              0 file4.txt
+-a----         10/6/2025   4:48 PM              0 file5.txt
+
+
+PS C:\BackupLab\Documents> 1..5 | ForEach-Object { New-Item -Path "C:\BackupLab\Documents\testfolder" -Name "file$_.txt" -ItemType File }
+
+
+    Directory: C:\BackupLab\Documents\testfolder
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         10/6/2025   4:48 PM              0 file1.txt
+-a----         10/6/2025   4:48 PM              0 file2.txt
+-a----         10/6/2025   4:48 PM              0 file3.txt
+-a----         10/6/2025   4:48 PM              0 file4.txt
+-a----         10/6/2025   4:48 PM              0 file5.txt
+
+
+PS C:\BackupLab\Documents> Get-ChildItem -Recurse
+
+
+    Directory: C:\BackupLab\Documents
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         10/6/2025   4:48 PM                testfolder
+-a----         10/6/2025   4:48 PM              0 file1.txt
+-a----         10/6/2025   4:48 PM              0 file2.txt
+-a----         10/6/2025   4:48 PM              0 file3.txt
+-a----         10/6/2025   4:48 PM              0 file4.txt
+-a----         10/6/2025   4:48 PM              0 file5.txt
+
+
+    Directory: C:\BackupLab\Documents\testfolder
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         10/6/2025   4:48 PM              0 file1.txt
+-a----         10/6/2025   4:48 PM              0 file2.txt
+-a----         10/6/2025   4:48 PM              0 file3.txt
+-a----         10/6/2025   4:48 PM              0 file4.txt
+-a----         10/6/2025   4:48 PM              0 file5.txt
+
+
+PS C:\BackupLab\Documents> 
+```
+
+I created the file for the backup script.
+```powershell
+PS C:\BackupLab> New-Item -Path "C:\BackupLab\backupscript.ps1" -ItemType File -Force
+
+
+    Directory: C:\BackupLab
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         10/6/2025   4:51 PM              0 backupscript.ps1
+
+
+PS C:\BackupLab> Set-Content -Path "C:\BackupLab\backupscript.ps1" -Value 'Write-Output "Backup script initiated."'
+```
+
+I added a line to retrieve the date of the backup
+```powershell
+PS C:\BackupLab> Add-Content -Path "C:\BackupLab\backupscript.ps1" -Value '$now = Get-Date -Format "dd_MM_yy"'
+```
+
+I added another line that archives the file with a name including the date
+```powershell
+PS C:\BackupLab> Add-Content -Path "C:\BackupLab\backupscript.ps1" -Value 'Compress-Archive -Path "C:\BackupLab\Documents\*" -DestinationPath "C:\BackupLab\backup_$now.zip" -Force'
+```
+
+I proceeded with a test to make sure it worked. It ran successfully and created the archive.
+```
+PS C:\BackupLab> powershell -ExecutionPolicy Bypass -File "C:\BackupLab\backupscript.ps1"
+Backup script initiated.
+PS C:\BackupLab> dir
+
+
+    Directory: C:\BackupLab
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         10/6/2025   4:48 PM                Documents
+-a----         10/6/2025   4:55 PM            183 backupscript.ps1
+-a----         10/6/2025   4:57 PM           1072 backup_06_10_25.zip
+
+
+PS C:\BackupLab> 
+```
+
+Now I had to schedule the task. For this I used the Task Scheduler to create a new task.
+![HourlyBackupTaskCreation.png](./Screenshots/HourlyBackupTaskCreation.png)
+![HourlyBackupTaskTrigger.png](./Screenshots/HourlyBackupTaskTrigger.png)
+![HourlyBackupTaskAction.png](./Screenshots/HourlyBackupTaskAction.png "HourlyBackupTaskAction.png")
+
+After setting the program to trigger at a slightly later time, I removed the file and waited for it to reappear.
+
+The program ran, and created an archive successfully
+![HourlyBackupTask.png](./Screenshots/HourlyBackupTask.png)
+
+```powershell
+PS C:\BackupLab> dir
+
+
+    Directory: C:\BackupLab
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         10/6/2025   4:48 PM                Documents
+-a----         10/6/2025   4:55 PM            183 backupscript.ps1
+-a----         10/6/2025   5:15 PM           1072 backup_06_10_25.zip
+
+
+```
+
+To make SCP work, I created key file for my ubuntu VM so I would not have to key in credentials to access it.
+![WinAccessKeyfile.png](./Screenshots/WinAccessKeyfile.png)
+
+This allowed me to move my backups to the ubuntu server VM
+![TransferWinBackup.png](./Screenshots/TransferWinBackup.png)
