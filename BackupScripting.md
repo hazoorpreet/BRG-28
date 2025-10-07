@@ -169,7 +169,7 @@ hazoor@ICT171Labs:~/Documents$ ls -l ~/backup_04_10_25.zip
 -rw-rw-r-- 1 hazoor hazoor 852068 Oct  4 15:08 /home/hazoor/backup_04_10_25.zip
 ```
 
-Now, before I made this script globablly executable, I needed to make some alterations to make sure it would not only work for my own account. I replaced every instance of `/home/hazoor` with `$HOME` so it would automatically select the running user's home directory from its absolute path. I also added creation/destruction commands for the `backup` directory, resulting in the following script:
+Now, before I made this script globally executable, I needed to make some alterations to make sure it would not only work for my own account. I replaced every instance of `/home/hazoor` with `$HOME` so it would automatically select the running user's home directory from its absolute path. I also added creation/destruction commands for the `backup` directory, resulting in the following script:
 ```bash
 #!/bin/bash
 
@@ -397,9 +397,13 @@ hazoor@ICT171Labs:~$
 - Why is using absolute paths important in scripts run by cron?
     - To avoid running scripts in the wrong directory as the place where cron runs from may not be where the script needs to run.
 - What are the benefits of cloud exporting for backups?
+    - Limits damage done to business if the server is lost
 - How does cron differ from manual execution?
+    - Cron makes it easy to run services automatically, but will not run interactively.
 - What happens if SSH keys are not accepted ahead of time?
+    - It will prompt to accept, which would leave any automated script stuck.
 - How can login messages help improve user/system engagement?
+    - It can provide users with important system information
 
 ## Windows Backup Scripting
 

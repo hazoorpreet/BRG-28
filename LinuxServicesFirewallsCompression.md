@@ -275,7 +275,7 @@ hazoor@ICT171Labs:~/Desktop$ touch Hi_Hazoor
 ```
 ![RemoteTouch.png](Screenshots/RemoteTouch.png)
 
-I tried to gedit from my host device to my guest, but it did not work. Instead it opened in the guest. This may be due to the fact that both the VM and Host use Wayland as a windowing system rather than X11.
+I tried to gedit from my host device to my guest, but it did not work. Instead it opened in the guest. This may be due to the fact that the Host uses Wayland as a windowing system rather than X11.
 ![GeditRemoteAttempt.png](./Screenshots/GeditRemoteAttempt.png)
 
 ## Reflection
