@@ -70,7 +70,7 @@ InkJet:
 - Fixed Costs: S$885
     - Upfront: S$689.00
     - Warranty: S$196.00
-- Variable Costs: 17396.89
+- Variable Costs: S$19,394.89
     - Power: S$7.99
     - Ink: S$17,222.40
     - Paper: S$2,164.50
@@ -81,7 +81,7 @@ LaserJet:
 - Fixed Costs: S$1,499
     - Upfront: S$1,499.00
     - Warranty: S$0.00
-- Variable Costs: S$37320.37
+- Variable Costs: S$37,320.37
     - Power: S$26.62
     - Ink: S$35,129.25
     - Paper: S$2,164.50
