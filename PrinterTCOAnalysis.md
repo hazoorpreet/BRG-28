@@ -7,7 +7,7 @@ For the printer TCO analysis, two printers have been chosen:
 - [HP OfficeJet Pro 9730 Wide Format All-in-One Printer (537P5B)](https://www.hp.com/sg-en/shop/hp-officejet-pro-9730-wide-format-all-in-one-printer-537p5b.html), an InkJet Office Printer (Referred to in this document as "InkJet Printer")
 - [HP Color LaserJet Pro MFP 4303dw Printer (5HH65A)](https://www.hp.com/sg-en/shop/hp-color-laserjet-pro-mfp-4303dw-printer-5hh65a.html), a LaserJet Office Printer (Referred to in this document as "LaserJet Printer")
 
-The following assumptions have been made:
+    The following assumptions have been made:
 
 - Period of 3 years (due to warranty offered by HP)
 - Pages printed per week: 750
@@ -46,7 +46,7 @@ Ink (For both printers, all colors except black are the same price)
 | Printer  | Ink     | Ink Price (1 cartridge each color) | Pages per black cartridge | Total Price for Period |
 |----------|---------|------------------------------------|---------------------------|------------------------|
 | InkJet   | HP 937  | S$184.00                           | 1,250                     | S$17,222.40            |
-| LaserJet | HP 230A | S$600.50                           | 2,000                     | S$17,222.40            |
+| LaserJet | HP 230A | S$600.50                           | 2,000                     | S$35,129.25            |
 
 ![HP937Black.png](./Screenshots/HP937Black.png)
 ![HP937Color.png](Screenshots/HP937Color.png)
